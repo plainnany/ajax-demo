@@ -5,7 +5,7 @@
   <title>JS Bin</title>
 </head>
 <body>
-  <form action="/login" method="POST" id="loginForm">
+  <form action="/login" method="GET" id="loginForm">
     <div>
       <label>
         姓名：
@@ -21,15 +21,15 @@
     <input type="submit">
     <script>
         let loginForm = document.getElementById('loginForm')
-    loginForm.addEventListener('submit',function(e){
-        e.preventDefault()
-        let username = loginForm.username.value
-        let password = loginForm.password.value
-        console.log(username,password)
+        loginForm.addEventListener('submit',function(e){
+          e.preventDefault()
+          let username = loginForm.username.value
+          let password = loginForm.password.value
+          console.log(username,password)
   
-        let request = new XMLHttpRequest()
+          let request = new XMLHttpRequest()
         
-        request.onreadystatechange = function(){
+          request.onreadystatechange = function(){
 
             if(request.readyState === 4){
 
@@ -40,10 +40,10 @@
                 }
                 
             }
-        }
-        request.open('POST',loginForm.action)
-        request.send(`username=${username}&password=${password}`)
-})
+          }
+          request.open('GET',`login/?username=${username}&password=${password}`)
+          request.send()
+        })
     </script>
   </form>
   
