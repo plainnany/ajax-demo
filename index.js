@@ -27,15 +27,22 @@ var server = http.createServer(function(request, response){
       var string = fs.readFileSync('./main.js')
       response.setHeader('Content-Type', 'application/javascript')
       response.end(string)
+    }else if(path === '/login'){
+        if(query.username === 'nany' && query.password === '123123') {
+          response.statusCode = 200
+          response.setHeader('Content-Type', 'text/html;charset=utf-8')
+          response.end('Hello AJAX!')
+        }else{
+          response.statusCode = 404
+          response.setHeader('Content-Type', 'text/html;charset=utf-8') 
+          response.end(string)
+        }
+      
     }else{  
-      response.statusCode = 200
-      response.end('Hello AJAX!')
+      response.statusCode = 404
+      response.setHeader('Content-Type', 'text/html;charset=utf-8') 
+      response.end(string)
     }
-    // }else{
-    //   response.statusCode = 404
-    //   response.setHeader('Content-Type', 'text/html;charset=utf-8') 
-    //   response.end('找不到对应的路径，你需要自行修改 index.js')
-    // }
   }else if(method === 'POST'){
     if(path === '/login'){
       response.setHeader('Content-Type', 'text/html;charset=utf-8') 
